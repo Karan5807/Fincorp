@@ -1,0 +1,9 @@
+body{
+    margin: 1rem;
+    height: 100vh;
+    background-image: linear-gradient(to right top, #fff9e3, #f8fbe8, #f4fdee, #f2fef4, #f2fef9, #f3fefb, #f4fdfd, #f6fdfe, #f7fcfe, #f9fbfd, #fafafc, #fafafa);
+}
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
