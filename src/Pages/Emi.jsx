@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import Header from "../Component/Header";
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
 import { Doughnut } from "react-chartjs-2";
+
 
 function Emi() {
   ChartJS.register(ArcElement, Tooltip, Legend);
@@ -53,12 +53,13 @@ function Emi() {
 
   return (
     <div className="container">
-      <Header />
       <div className="flex justify-center">
         <div
           className="container box-border rounded-md bg-blue-50 m-2 p-2"
           style={{ width: 740, height: 350 }}
         >
+
+          {/* Section for demo */}
           {/* Section for Amount */}
           <div className="container">
             <div className="container flex justify-between">

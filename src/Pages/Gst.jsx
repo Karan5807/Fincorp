@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import Header from "../Component/Header";
 import InclusiveGST from "./InclusiveGST";
 import ExclusiveGST from "./ExclusiveGST";
 
@@ -12,26 +11,37 @@ const calculateGST = () => {
 
   return (
     // Section for Tabs
-    <div className="container box-content">
-      <Header />
+    <div className="container mx-auto">
       {/* Section for Tab */}
-      <div className="container flex justify-evenly">
+      <div className="flex flex-col sm:flex-row border-b border-gray-300">
         <button
-          className={activeTab === "Inclusive" ? "active" : ""}
+          className={`py-2 px-4 text-sm font-medium ${
+            activeTab === "Inclusive"
+              ? "border-b-2 border-blue-500 text-blue-500"
+              : "text-gray-500 hover:text-blue-500"
+          } md:text-base lg:text-lg`}
           onClick={() => handleTabClick("Inclusive")}
         >
-          <p className=" p-2 m-2 rounded-md bg-black text-white font-sans text-lg font-medium"> Inclusive GST </p>
+          <p className="text-sm sm:text-lg font-semibold p-2 sm:p-4 border-b-2 border-blue-500 text-blue-500 border-transparent">
+            Inclusive GST
+          </p>
         </button>
         <button
-          className={activeTab === "Exclusive" ? "active" : ""}
+          className={`py-2 px-4 text-sm font-medium ${
+            activeTab === "Exclusive"
+              ? "border-b-2 border-blue-500 text-blue-500"
+              : "text-gray-500 hover:text-blue-500"
+          } md:text-base lg:text-lg`}
           onClick={() => handleTabClick("Exclusive")}
         >
-         <p className=" p-1 m-1 rounded-md bg-black text-white font-sans text-lg font-medium">Exclusive GST</p> 
+          <p className="text-sm sm:text-lg font-semibold p-2 sm:p-4 border-b-2 border-blue-500 text-blue-500 border-transparent">
+            Exclusive GST
+          </p>
         </button>
       </div>
 
       {/* Section for Tab Contents */}
-      <div className="container flex justify-center">
+      <div>
         {activeTab === "Inclusive" && <InclusiveGST />}
         {activeTab === "Exclusive" && <ExclusiveGST />}
       </div>

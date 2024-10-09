@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Slider } from "../Services";
 
 const ExclusiveGST = () => {
   const [taxAmount, setTaxAmount] = useState(25000);
@@ -8,79 +9,48 @@ const ExclusiveGST = () => {
 
   //  Section for Excluisve
   const excludedTax = Math.round(Amount - [Amount * (100 / (100 + taxSlab))]);
-  const postGst = parseInt(Amount - excludedTax);
+  const totalAmt = parseInt(Amount - excludedTax);
 
   return (
-    <div
-      className="container box-border  rounded-md bg-blue-50"
-      style={{ maxWidth: 720 }}
-    >
-      <h4 className="text-balance text-center font-sans font-medium text-lg antialiased">Exclusive Tax</h4>
-      {/* Section for Tax amount */}
-      <div className="container">
-        <div className="container flex justify-between">
-          <h6 className="p-1 m-1 font-sans font-medium text-lg antialiased">
-            Tax Amount
-          </h6>
-          <p className="p-1 m-1 font-sans font-medium text-lg antialiased bg-orange-200 rounded-md">
-            &#8377;{taxAmount}
-          </p>
-        </div>
+    <div className="flex items-center justify-center h-screen">
+      <div className="bg-white shadow-lg rounded-lg p-6 w-full max-w-md">
+        <h2 className="text-2xl font-semibold text-center mb-6">
+          Exclusive GST Tax
+        </h2>
+        {/* Section for Tax amount */}
+        <Slider
+          Label="Amount"
+          Value={taxAmount}
+          Sign="₹"
+          Min={500}
+          Max={500000}
+          Step={10}
+          SliderColor="bg-blue-300"
+          OnChange={(e) => setTaxAmount(e.target.value)}
+        />
 
-        <div className="text-center">
-          <input
-            type="range"
-            min={500}
-            max={500000}
-            step={100}
-            value={taxAmount}
-            onChange={(e) => setTaxAmount(e.target.value)}
-            style={{ width: 700, height: 40 }}
-          />
-        </div>
-      </div>
-      
-      {/* Section for Tax Slab */}
-      <div className="container">
-        <div className="container flex justify-between">
-          <h6 className=" p-1 m-1 font-sans font-medium text-lg antialiased">
-            Tax Slab
-          </h6>
-          <h6 className=" bg-orange-200 p-1 m-1 font-sans font-medium text-lg antialiased  rounded-md">
-            {taxSlab}%
-          </h6>
-        </div>
+        {/* Section for Tax Slab */}
+        <Slider
+          Label="Tax Slab"
+          Value={taxSlab}
+          Sign="%"
+          Min={1}
+          Max={50}
+          Step={1}
+          SliderColor="bg-green-300"
+          OnChange={(e) => setTaxSlab(e.target.value)}
+        />
 
-        <div className="container text-center ">
-          <input
-            type="range"
-            min={1}
-            max={30}
-            step={1}
-            value={taxSlab}
-            onChange={(e) => setTaxSlab(e.target.value)}
-            style={{ width: 700, height: 40 }}
-          />
-        </div>
-      </div>
-
-      <div className="container flex justify-around">
-        <div className="block">
-          <h6 className="text-center p-1 m-1 font-sans font-medium text-lg antialiased">
-            Total GST
-          </h6>
-          <h6 className="text-center bg-orange-200 p-1 m-1 font-sans font-medium text-lg antialiased  rounded-md">
-            &#8377;{excludedTax}
-          </h6>
-        </div>
-
-        <div className="block">
-          <h6 className="text-center p-1 m-1 font-sans font-medium text-lg antialiased">
-            Post-GST Amount
-          </h6>
-          <h6 className="text-center bg-orange-200 p-1 m-1 font-sans font-medium text-lg antialiased  rounded-md">
-            &#8377;{postGst}
-          </h6>
+        {/* Section for Output Result */}
+        <div className="mt-6">
+          <div className="flex justify-between text-lg">
+            <span>GST Amount:</span>
+            <span>₹ {excludedTax}</span>
+          </div>
+          <div className="flex justify-between text-lg font-semibold mt-2">
+            <span>Total Amount:</span>
+            <span>₹ {totalAmt}</span>
+          </div>
         </div>
       </div>
     </div>

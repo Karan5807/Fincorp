@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import Header from "../Component/Header";
 import EPFCalculator from "./EPF";
 import PPF from "./PPF";
 
@@ -13,7 +12,6 @@ function Providentfund() {
 
   return (
     <div className="container">
-      <Header />
       {/* Section for Tab */}
       <div className="container flex justify-evenly">
         <button

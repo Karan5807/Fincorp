@@ -13,7 +13,6 @@ function Deposit() {
 
   return (
     <div className="container box-content">
-      <Header />
       <div className="container flex justify-evenly">
         <button
           className={activeTab === "Fixed_Deposit" ? "active" : ""}

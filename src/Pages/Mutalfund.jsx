@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import Header from "../Component/Header";
 import SIP from "./SIP";
 import Lumpsum from "./Lumpsum";
 
@@ -11,23 +10,31 @@ function Mutalfund() {
   };
 
   return (
-    <div className="container">
-      <Header />
-      <div className="container flex justify-evenly">
+    <div className="container mx-auto">
+
+      <div className="flex flex-col sm:flex-row border-b border-gray-300">
         <button
-          className={activeTab === "SIP" ? "active" : ""}
+            className={`py-2 px-4 text-sm font-medium ${
+              activeTab === "SIP"
+                ? "border-b-2 border-blue-500 text-blue-500"
+                : "text-gray-500 hover:text-blue-500"
+            } md:text-base lg:text-lg`}
           onClick={() => handleTabClick("SIP")}
         >
-          <p className=" p-2 m-2 rounded-md bg-black text-white font-sans text-lg font-medium">
-            {" "}
-            SIP{" "}
+          <p className="text-sm sm:text-lg font-semibold p-2 sm:p-4 border-b-2 border-blue-500 text-blue-500 border-transparent">
+            SIP
           </p>
         </button>
+
         <button
-          className={activeTab === "Lumpsum" ? "active" : ""}
+          className={`py-2 px-4 text-sm font-medium ${
+    activeTab === "Lumpsum"
+      ? "border-b-2 border-blue-500 text-blue-500"
+      : "text-gray-500 hover:text-blue-500"
+  } md:text-base lg:text-lg`}
           onClick={() => handleTabClick("Lumpsum")}
         >
-          <p className=" p-1 m-1 rounded-md bg-black text-white font-sans text-lg font-medium">
+          <p className="text-sm sm:text-lg font-semibold p-2 sm:p-4 border-b-2 border-blue-500 text-blue-500 border-transparent">
             Lumpsum
           </p>
         </button>

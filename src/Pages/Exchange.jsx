@@ -5,7 +5,6 @@ import { useState, useEffect } from "react";
 import AmtInput from "../Component/AmtInput";
 import AmtOutput from "../Component/AmtOutput";
 import Dropdown from "../Component/Dropdown";
-import Header from "../Component/Header";
 
 function Exchange() {
   const [countries, setCountries] = useState([]);
@@ -63,7 +62,6 @@ function Exchange() {
 
   return (
     <div className="container text-white">
-      <Header />
       <div className="container text-red-950">
         {/* Section for Heading  */}
         <div className="text-center text-pretty font-medium">
