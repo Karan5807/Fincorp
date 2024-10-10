@@ -16,18 +16,6 @@ const calculateGST = () => {
       <div className="flex flex-col sm:flex-row border-b border-gray-300">
         <button
           className={`py-2 px-4 text-sm font-medium ${
-            activeTab === "Inclusive"
-              ? "border-b-2 border-blue-500 text-blue-500"
-              : "text-gray-500 hover:text-blue-500"
-          } md:text-base lg:text-lg`}
-          onClick={() => handleTabClick("Inclusive")}
-        >
-          <p className="text-sm sm:text-lg font-semibold p-2 sm:p-4 border-b-2 border-blue-500 text-blue-500 border-transparent">
-            Inclusive GST
-          </p>
-        </button>
-        <button
-          className={`py-2 px-4 text-sm font-medium ${
             activeTab === "Exclusive"
               ? "border-b-2 border-blue-500 text-blue-500"
               : "text-gray-500 hover:text-blue-500"
@@ -38,12 +26,24 @@ const calculateGST = () => {
             Exclusive GST
           </p>
         </button>
+        <button
+          className={`py-2 px-4 text-sm font-medium ${
+            activeTab === "Inclusive"
+              ? "border-b-2 border-blue-500 text-blue-500"
+              : "text-gray-500 hover:text-blue-500"
+          } md:text-base lg:text-lg`}
+          onClick={() => handleTabClick("Inclusive")}
+        >
+          <p className="text-sm sm:text-lg font-semibold p-2 sm:p-4 border-b-2 border-blue-500 text-blue-500 border-transparent">
+            Inclusive GST
+          </p>
+        </button>
       </div>
 
       {/* Section for Tab Contents */}
       <div>
-        {activeTab === "Inclusive" && <InclusiveGST />}
-        {activeTab === "Exclusive" && <ExclusiveGST />}
+        {activeTab === "Exclusive" && <InclusiveGST />}
+        {activeTab === "Inclusive" && <ExclusiveGST />}
       </div>
     </div>
   );

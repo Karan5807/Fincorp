@@ -61,20 +61,20 @@ function Exchange() {
   }
 
   return (
-    <div className="container text-white">
-      <div className="container text-red-950">
+    <div className="container">
+      <div className="container text-red-950 flex flex-col items-center justify-center h-screen bg-gray-100 p-4">
         {/* Section for Heading  */}
-        <div className="text-center text-pretty font-medium">
-          <h1 className="text-center text-2xl font-sans font-semibold">
+        <div className="container">
+          <h2 className="text-2xl font-semibold text-center mb-6">
             Fincorp Currency convertor
-          </h1>
-          <h2 className="text-center text-2xl font-sans font-semibold ">
+          </h2>
+          <h2 className="text-2xl font-semibold text-center mb-6">
             Trusted Global Currency Converter
           </h2>
         </div>
 
         {/* Section for Result */}
-        <div className="Exchange mt-40 max-w-3xl max-h-60 border-2 p-2 border-yellow-500">
+        <div className="Exchange mt-20 border-2 p-2 border-yellow-500">
         <div className="flex justify-evenly bg-pink-100 border-2 rounded-lg border-white text-red-900">
           {/* Section for From Amount */}
           <div className=" flex justify-around m-2 p-2">

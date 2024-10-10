@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
 import { Doughnut } from "react-chartjs-2";
+import { Slider } from "../Services";
 
 const Recuring_Deposit = () => {
   ChartJS.register(ArcElement, Tooltip, Legend);
@@ -56,124 +57,75 @@ const Recuring_Deposit = () => {
   };
 
   return (
-    <div className="container flex justify-center">
-      <div
-        className="container box-border rounded-md bg-blue-50 m-2 p-2"
-        style={{ width: 740, height: 350 }}
-      >
-        <h2 className="container text-center font-sans font-medium text-lg">
-          Recuring Deposit
-        </h2>
+    <div className="container">
+      <div className="flex justify-center items-center h-screen gap-6">
+        {/* Section for Calculating */}
+        <div className="bg-white shadow-lg rounded-lg p-6 w-full max-w-md">
+          <h2 className="text-2xl font-semibold text-center mb-6">
+            Recurring Deposit
+          </h2>
 
-        {/* Section for Amount */}
-        <div className="container">
-          <div className="container flex justify-between">
-            <h6 className="p-1 m-1 font-sans font-medium text-lg antialiased">
-              Monthly Investment
-            </h6>
-            <h6 className="p-1 m-1 font-sans font-medium text-lg antialiased bg-orange-200 rounded-md">
-              &#8377;{amount}
-            </h6>
-          </div>
+          {/* Section for Amount */}
+          <Slider
+            Label="Monthly Investment"
+            Value={amount}
+            Min={10000}
+            Max={500000}
+            Sign=" ₹"
+            SliderColor="bg-blue-300"
+            Step={1000}
+            OnChange={(e) => setAmount(e.target.value)}
+          />
 
-          <div className="container text-centre">
-            <input
-              type="range"
-              min={10000}
-              max={5000000}
-              step={1000}
-              value={amount}
-              style={{ width: 700 }}
-              onChange={(e) => setAmount(e.target.value)}
-            />
+          {/* Section for Rate of Intrest */}
+          <Slider
+            Label="Interest Ratet"
+            Value={rate}
+            Min={1}
+            Max={15}
+            Sign=" %"
+            SliderColor="bg-green-300"
+            Step={1}
+            OnChange={(e) => setRate(e.target.value)}
+          />
+
+          {/* Section for Years */}
+          <Slider
+            Label={`Number of ${toggle ? "Months" : "Year"}`}
+            Value={year}
+            Min={1}
+            Max={25}
+            SliderColor="bg-purple-300"
+            Step={1}
+            OnChange={(e) => setYear(e.target.value)}
+          />
+          <button className="text-orange-600" onClick={handleToggle}>
+            {toggle ? "Months" : "Year"}
+          </button>
+
+          {/* Display Result */}
+          <div className="mt-6">
+            <div className="flex justify-between text-lg">
+              <span>Invested Amount:</span>
+              <span>₹ {TotalInvest}</span>
+            </div>
+            <div className="flex justify-between text-lg font-semibold mt-2">
+              <span>Estimated Return:</span>
+              <span>₹ {EstReturn}</span>
+            </div>
+            <div className="flex justify-between text-lg font-semibold mt-2">
+              <span>Total Amount:</span>
+              <span>₹ {ReturnAmt}</span>
+            </div>
           </div>
         </div>
-
-        {/* Section for Rate of Intrest */}
-        <div className="container">
-          <div className="container flex justify-between">
-            <h6 className="p-1 m-1 font-sans font-medium text-lg antialiased">
-              Interest Rate (%):
-            </h6>
-            <h6 className="p-1 m-1 font-sans font-medium text-lg antialiased bg-orange-200 rounded-md">
-              {rate}
-            </h6>
-          </div>
-
-          <div className="container text-center">
-            <input
-              type="range"
-              min={1}
-              max={15}
-              step={1}
-              value={rate}
-              style={{ width: 700 }}
-              onChange={(e) => setRate(e.target.value)}
-            />
-          </div>
+        {/* Section for Graph */}
+        <div className="bg-white shadow-lg rounded-lg p-6 w-full max-w-md">
+          <h2 className="text-2xl font-semibold text-center mb-6">
+            Recurring Deposit Calculator Graph
+          </h2>
+          <Doughnut style={{ width: 300, height: 300 }} data={RecuringData} />
         </div>
-
-        {/* Section for Years */}
-        <div className="container">
-          <div className="container flex justify-between">
-            <h6 className="p-1 m-1 font-sans font-medium text-lg antialiased">
-              Number of :
-              {
-                <button className="text-orange-600" onClick={handleToggle}>
-                  {toggle ? "Months" : "Year"}
-                </button>
-              }
-            </h6>
-            <h6 className="p-1 m-1 font-sans font-medium text-lg antialiased bg-orange-200 rounded-md">
-              {year}
-            </h6>
-          </div>
-          <div className="container text-center">
-            <input
-              type="range"
-              min={1}
-              max={25}
-              step={1}
-              value={year}
-              style={{ width: 700 }}
-              onChange={(e) => setYear(e.target.value)}
-            />
-          </div>
-        </div>
-
-        {/* Display Result */}
-        <div className="container flex justify-around">
-          <div className="block">
-            <h6 className="text-center p-1 m-1 font-sans font-medium text-lg antialiased">
-              Invested Amount
-            </h6>
-            <h6 className="text-center bg-orange-200 p-1 m-1 font-sans font-medium text-lg antialiased  rounded-md">
-              &#8377;{TotalInvest}
-            </h6>
-          </div>
-
-          <div className="block">
-            <h6 className="text-center p-1 m-1 font-sans font-medium text-lg antialiased">
-              Est Return
-            </h6>
-            <h6 className="text-center bg-orange-200 p-1 m-1 font-sans font-medium text-lg antialiased  rounded-md">
-              &#8377;{EstReturn}
-            </h6>
-          </div>
-
-          <div className="block">
-            <h6 className="text-center p-1 m-1 font-sans font-medium text-lg antialiased">
-              Total Value
-            </h6>
-            <h6 className="text-center bg-orange-200 p-1 m-1 font-sans font-medium text-lg antialiased  rounded-md">
-              &#8377;{ReturnAmt}
-            </h6>
-          </div>
-        </div>
-      </div>
-      {/* Section for Graph */}
-      <div className="container-md">
-        <Doughnut style={{ width: 300, height: 300 }} data={RecuringData} />
       </div>
     </div>
   );

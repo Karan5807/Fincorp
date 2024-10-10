@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
 import { Doughnut } from "react-chartjs-2";
-
+import { Slider } from "../Services";
 
 function Emi() {
   ChartJS.register(ArcElement, Tooltip, Legend);
@@ -53,125 +53,71 @@ function Emi() {
 
   return (
     <div className="container">
-      <div className="flex justify-center">
-        <div
-          className="container box-border rounded-md bg-blue-50 m-2 p-2"
-          style={{ width: 740, height: 350 }}
-        >
-
-          {/* Section for demo */}
+      <div className="flex justify-center items-center h-screen gap-6">
+        {/* Section for Calculating EMI */}
+        <div className="bg-white shadow-lg rounded-lg p-6 w-full max-w-md">
+          <h2 className="text-2xl font-semibold text-center mb-6">
+            EMI Calculator
+          </h2>
           {/* Section for Amount */}
-          <div className="container">
-            <div className="container flex justify-between">
-              <h6 className="p-1 m-1 font-sans font-medium text-lg antialiased">
-                Monthly Investment
-              </h6>
-              <h6 className="p-1 m-1 font-sans font-medium text-lg antialiased bg-orange-200 rounded-md">
-                &#8377;{amount}
-              </h6>
-            </div>
-
-            <div className="container text-centre">
-              <input
-                type="range"
-                min={100000}
-                max={5000000}
-                step={1}
-                value={amount}
-                onChange={(e) => setAmount(e.target.value)}
-                style={{ width: 700 }}
-              />
-            </div>
-          </div>
+          <Slider
+            Label="Monthly Investment"
+            Value={amount}
+            SliderColor="bg-blue-300"
+            Sign=" ₹"
+            Min={100000}
+            Max={5000000}
+            Step={10}
+            OnChange={(e) => setAmount(e.target.value)}
+          />
 
           {/* Section for Rate of Intrest */}
-          <div className="container">
-            <div className="container flex justify-between">
-              <h6 className="p-1 m-1 font-sans font-medium text-lg antialiased">
-                Interest Rate (%):
-              </h6>
-              <h6 className="p-1 m-1 font-sans font-medium text-lg antialiased bg-orange-200 rounded-md">
-                {rate}
-              </h6>
-            </div>
-
-            <div className="container text-center">
-              <input
-                type="range"
-                min={1}
-                max={15}
-                step={1}
-                value={rate}
-                style={{ width: 700 }}
-                onChange={(e) => setRate(e.target.value)}
-              />
-            </div>
-          </div>
+          <Slider
+            Label="Interest Rate"
+            Value={rate}
+            SliderColor="bg-green-300"
+            Sign=" %"
+            Min={1}
+            Max={15}
+            OnChange={(e) => setRate(e.target.value)}
+          />
 
           {/* Section for Years */}
-          <div className="container">
-            <div className="container flex justify-between">
-              <h6 className="p-1 m-1 font-sans font-medium text-lg antialiased">
-                Number of Year
-              </h6>
-              <h6 className="p-1 m-1 font-sans font-medium text-lg antialiased bg-orange-200 rounded-md">
-                {year}
-              </h6>
-            </div>
-            <div className="container text-center">
-              <input
-                type="range"
-                min={1}
-                max={25}
-                step={1}
-                value={year}
-                style={{ width: 700 }}
-                onChange={(e) => setYear(e.target.value)}
-              />
-            </div>
-          </div>
+          <Slider
+            Label="Number of Year"
+            Value={year}
+            SliderColor="bg-purple-300"
+            Min={1}
+            Max={25}
+            OnChange={(e) => setYear(e.target.value)}
+          />
 
           {/* Display Result */}
-          <div className="container flex justify-around">
-            <div className="block">
-              <h6 className="text-center p-1 m-1 font-sans font-medium text-lg antialiased">
-                EMI Amount
-              </h6>
-              <h6 className="text-center bg-orange-200 p-1 m-1 font-sans font-medium text-lg antialiased  rounded-md">
-                &#8377;{EMI}
-              </h6>
+          <div className="mt-6">
+            <div className="flex justify-between text-lg font-semibold mt-2">
+              <span>EMI Amount:</span>
+              <span>₹ {EMI}</span>
             </div>
-
-            <div className="block">
-              <h6 className="text-center p-1 m-1 font-sans font-medium text-lg antialiased">
-                Loan Amount
-              </h6>
-              <h6 className="text-center bg-orange-200 p-1 m-1 font-sans font-medium text-lg antialiased  rounded-md">
-                &#8377;{amount}
-              </h6>
+            <div className="flex justify-between text-lg font-semibold mt-2">
+              <span>Loan Amount:</span>
+              <span>₹ {amount}</span>
             </div>
-
-            <div className="block">
-              <h6 className="text-center p-1 m-1 font-sans font-medium text-lg antialiased">
-                Total Intrest
-              </h6>
-              <h6 className="text-center bg-orange-200 p-1 m-1 font-sans font-medium text-lg antialiased  rounded-md">
-                &#8377;{totalIntrest}
-              </h6>
+            <div className="flex justify-between text-lg font-semibold mt-2">
+              <span>Total Intrest:</span>
+              <span>₹ {totalIntrest}</span>
             </div>
-
-            <div className="block">
-              <h6 className="text-center p-1 m-1 font-sans font-medium text-lg antialiased">
-                Total Amount
-              </h6>
-              <h6 className="text-center bg-orange-200 p-1 m-1 font-sans font-medium text-lg antialiased  rounded-md">
-                &#8377;{totalAmt}
-              </h6>
+            <div className="flex justify-between text-lg font-semibold mt-2">
+              <span>Total Amount:</span>
+              <span>₹ {totalAmt}</span>
             </div>
           </div>
+          <p className="text-center font-medium">EMI per month</p>
         </div>
         {/* Section for Graph */}
-        <div className="container-md">
+        <div className="bg-white shadow-lg rounded-lg p-6 w-full max-w-md">
+          <h2 className="text-2xl font-semibold text-center mb-6">
+            EMI Calculator Graph
+          </h2>
           <Doughnut style={{ width: 300, height: 300 }} data={data} />
         </div>
       </div>

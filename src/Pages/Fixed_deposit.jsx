@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
 import { Doughnut } from "react-chartjs-2";
+import { Slider } from "../Services";
 
 const Fixed_deposit = () => {
   ChartJS.register(ArcElement, Tooltip, Legend);
@@ -80,169 +81,117 @@ const Fixed_deposit = () => {
   };
 
   return (
-    <div className="container flex justify-center">
-      {/* Section for Calculation */}
-      <div
-        className="container box-border rounded-md bg-blue-50 m-2 p-2"
-        style={{ width: 740, height: 350 }}
-      >
-        <h2 className="container text-center font-sans font-medium text-lg">
-          Fixed Deposit
-        </h2>
+    <div className="container">
+      <div className="flex justify-center items-center h-screen gap-6">
+        {/* Section for Calculating*/}
+        <div className="bg-white shadow-lg rounded-lg p-6 w-full max-w-md">
+          <h2 className="text-2xl font-semibold text-center mb-6">
+            Fixed Deposit
+          </h2>
 
-        {/* Section for Amount */}
-        <div className="container">
-          <div className="container flex justify-between">
-            <h6 className="p-1 m-1 font-sans font-medium text-lg antialiased">
-              Total Investment
-            </h6>
-            <h6 className="p-1 m-1 font-sans font-medium text-lg antialiased bg-orange-200 rounded-md">
-              &#8377;{amount}
-            </h6>
-          </div>
+          {/* Section for Amount */}
+          <Slider
+            Label="Total Investment"
+            Value={amount}
+            Sign=" ₹"
+            Min={10000}
+            Max={5000000}
+            Step={1000}
+            SliderColor="bg-blue-300"
+            OnChange={(e) => setAmount(e.target.value)}
+          />
 
-          <div className="container text-centre">
-            <input
-              type="range"
-              min={10000}
-              max={5000000}
-              step={1000}
-              value={amount}
-              style={{ width: 700 }}
-              onChange={(e) => setAmount(e.target.value)}
-            />
-          </div>
+          {/* Section for Rate of Intrest */}
+          <Slider
+            Label="Intrest Rate"
+            Value={rate}
+            Sign="%"
+            Min={1}
+            Max={15}
+            Step={1}
+            OnChange={(e) => setRate(e.target.value)}
+            SliderColor="bg-green-300"
+          />
+
+          {/* Section for Years */}
+          <Slider
+            Label={`Number of ${tenure ? "Months" : "Years"}`}
+            Value={year}
+            Min={1}
+            Max={25}
+            Step={1}
+            SliderColor="bg-purple-300"
+            OnChange={(e) => setYear(e.target.value)}
+          />
+
+          <button className="text-orange-600" onClick={handleTenure}>
+            {tenure ? " Months " : " Years "}
+          </button>
+
+          {/* Display Result */}
+          {tenure && (
+            <div className="mt-6">
+              <div className="flex justify-between text-lg font-semibold">
+                <span>Invested Amount:</span>
+                <span>₹ {amount}</span>
+              </div>
+
+              <div className="flex justify-between text-lg font-semibold">
+                <span>Estimated Return Amount:</span>
+                <span>₹ {EstReturnMonthly}</span>
+              </div>
+
+              <div className="flex justify-between text-lg font-semibold">
+                <span>Total Value:</span>
+                <span>₹ {ReturnAmtMonth}</span>
+              </div>
+            </div>
+          )}
+          {!tenure && (
+            <div className="mt-6">
+              <div className="flex justify-between text-lg font-semibold">
+                <span>Invested Amount:</span>
+                <span>₹ {amount}</span>
+              </div>
+
+              <div className="flex justify-between text-lg font-semibold">
+                <span>Estimated Return Amount:</span>
+                <span>₹ {EstReturn}</span>
+              </div>
+
+              <div className="flex justify-between text-lg font-semibold">
+                <span>Total Value:</span>
+                <span>₹ {ReturnAmt}</span>
+              </div>
+            </div>
+          )}
         </div>
 
-        {/* Section for Rate of Intrest */}
-        <div className="container">
-          <div className="container flex justify-between">
-            <h6 className="p-1 m-1 font-sans font-medium text-lg antialiased">
-              Interest Rate (%):
-            </h6>
-            <h6 className="p-1 m-1 font-sans font-medium text-lg antialiased bg-orange-200 rounded-md">
-              {rate}
-            </h6>
-          </div>
-
-          <div className="container text-center">
-            <input
-              type="range"
-              min={1}
-              max={15}
-              step={1}
-              value={rate}
-              style={{ width: 700 }}
-              onChange={(e) => setRate(e.target.value)}
-            />
-          </div>
-        </div>
-
-        {/* Section for Years */}
-        <div className="container">
-          <div className="container flex justify-between">
-            <h6 className="p-1 m-1 font-sans font-medium text-lg antialiased">
-              Number of :
-              {
-                <button className="text-orange-600" onClick={handleTenure}>
-                  {tenure ? " Months " : " Years "}
-                </button>
-              }
-            </h6>
-            <h6 className="p-1 m-1 font-sans font-medium text-lg antialiased bg-orange-200 rounded-md">
-              {year}
-            </h6>
-          </div>
-          <div className="container text-center">
-            <input
-              type="range"
-              min={1}
-              max={25}
-              step={1}
-              value={year}
-              style={{ width: 700 }}
-              onChange={(e) => setYear(e.target.value)}
-            />
-          </div>
-        </div>
-
-        {/* Display Result */}
+        {/* Section for Graph */}
         {tenure && (
-          <div className="container flex justify-around">
-            <div className="block">
-              <h6 className="text-center p-1 m-1 font-sans font-medium text-lg antialiased">
-                Invested Amount
-              </h6>
-              <h6 className="text-center bg-orange-200 p-1 m-1 font-sans font-medium text-lg antialiased  rounded-md">
-                &#8377;{amount}
-              </h6>
-            </div>
-
-            <div className="block">
-              <h6 className="text-center p-1 m-1 font-sans font-medium text-lg antialiased">
-                Est Return
-              </h6>
-              <h6 className="text-center bg-orange-200 p-1 m-1 font-sans font-medium text-lg antialiased  rounded-md">
-                &#8377;{EstReturnMonthly}
-              </h6>
-            </div>
-
-            <div className="block">
-              <h6 className="text-center p-1 m-1 font-sans font-medium text-lg antialiased">
-                Total Value
-              </h6>
-              <h6 className="text-center bg-orange-200 p-1 m-1 font-sans font-medium text-lg antialiased  rounded-md">
-                &#8377;{ReturnAmtMonth}
-              </h6>
-            </div>
+          <div className="bg-white shadow-lg rounded-lg p-6 w-full max-w-md">
+            <h2 className="text-2xl font-semibold text-center mb-6">
+              Fixed Deposit Calculator Graph Monthly
+            </h2>
+            <Doughnut
+              style={{ width: 300, height: 300 }}
+              data={fixedDataMonths}
+            />
           </div>
         )}
+
         {!tenure && (
-          <div className="container flex justify-around">
-            <div className="block">
-              <h6 className="text-center p-1 m-1 font-sans font-medium text-lg antialiased">
-                Invested Amount
-              </h6>
-              <h6 className="text-center bg-orange-200 p-1 m-1 font-sans font-medium text-lg antialiased  rounded-md">
-                &#8377;{amount}
-              </h6>
-            </div>
-
-            <div className="block">
-              <h6 className="text-center p-1 m-1 font-sans font-medium text-lg antialiased">
-                Est Return
-              </h6>
-              <h6 className="text-center bg-orange-200 p-1 m-1 font-sans font-medium text-lg antialiased  rounded-md">
-                &#8377;{EstReturn}
-              </h6>
-            </div>
-
-            <div className="block">
-              <h6 className="text-center p-1 m-1 font-sans font-medium text-lg antialiased">
-                Total Value
-              </h6>
-              <h6 className="text-center bg-orange-200 p-1 m-1 font-sans font-medium text-lg antialiased  rounded-md">
-                &#8377;{ReturnAmt}
-              </h6>
-            </div>
+          <div className="bg-white shadow-lg rounded-lg p-6 w-full max-w-md">
+            <h2 className="text-2xl font-semibold text-center mb-6">
+              Fixed Deposit Calculator Graph Yearly
+            </h2>
+            <Doughnut
+              style={{ width: 300, height: 300 }}
+              data={fixedDataYears}
+            />
           </div>
         )}
       </div>
-      {/* Section for Graph */}
-      {tenure && (
-        <div className="container-md">
-          <Doughnut
-            style={{ width: 300, height: 300 }}
-            data={fixedDataMonths}
-          />
-        </div>
-      )}
-
-      {!tenure && (
-        <div className="container-md">
-          <Doughnut style={{ width: 300, height: 300 }} data={fixedDataYears} />
-        </div>
-      )}
     </div>
   );
 };

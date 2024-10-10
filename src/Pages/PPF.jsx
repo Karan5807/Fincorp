@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Slider } from "../Services";
 
 const PPF = () => {
   const [amount, setAmount] = useState(50000);
@@ -16,97 +17,54 @@ const PPF = () => {
   );
 
   return (
-    <div className="container flex justify-center">
-      <div
-        className="container box-border rounded-md bg-blue-50 m-2 p-2"
-        style={{ width: 740, height: 350 }}
-      >
-        <h2 className="container text-center font-sans font-medium text-lg">
-          PPF Calculator
+    <div className="flex items-center justify-center h-screen">
+      <div className="bg-white shadow-lg rounded-lg p-6 w-full max-w-md">
+        <h2 className="text-2xl font-semibold text-center mb-6">
+          Public Provident Fund Calculator
         </h2>
 
         {/* Section for Amount */}
-        <div className="container">
-          <div className="container flex justify-between">
-            <h6 className="p-1 m-1 font-sans font-medium text-lg antialiased">
-              Monthly Investment
-            </h6>
-            <h6 className="p-1 m-1 font-sans font-medium text-lg antialiased bg-orange-200 rounded-md">
-              &#8377;{amount}
-            </h6>
-          </div>
-
-          <div className="container text-centre">
-            <input
-              type="range"
-              min={10000}
-              max={5000000}
-              step={1000}
-              value={amount}
-              style={{ width: 700 }}
-              onChange={(e) => setAmount(e.target.value)}
-            />
-          </div>
-        </div>
+        <Slider
+          Label="Monthly Investment"
+          Sign="₹"
+          Value={amount}
+          SliderColor="bg-blue-300"
+          Min={10000}
+          Max={5000000}
+          Step={1000}
+          OnChange={(e) => setAmount(e.target.value)}
+        />
 
         {/* Section for Rate of Intrest */}
-        <div className="container">
-          <div className="container flex justify-between">
-            <h6 className="p-1 m-1 font-sans font-medium text-lg antialiased">
-              Interest Rate (%):
-            </h6>
-            <h6 className="p-1 m-1 font-sans font-medium text-lg antialiased bg-orange-200 rounded-md">
-              {rate}
-            </h6>
-          </div>
-
-          <div className="container text-center">
-            <input
-              type="range"
-              min={1}
-              max={15}
-              step={1}
-              value={rate}
-              style={{ width: 700 }}
-              onChange={(e) => setRate(e.target.value)}
-            />
-          </div>
-        </div>
+        <Slider
+          Label="Interest Rate"
+          Sign="%"
+          Value={rate}
+          Min={1}
+          Max={15}
+          SliderColor="bg-green-300"
+          OnChange={(e) => setRate(e.target.value)}
+        />
 
         {/* Section for Years */}
-        <div className="container">
-          <div className="container flex justify-between">
-            <h6 className="p-1 m-1 font-sans font-medium text-lg antialiased">
-              Number of :
-              {
-                <button className="text-orange-600" onClick={handleToggle}>
-                  {toggle ? "Months" : "Year"}
-                </button>
-              }
-            </h6>
-            <h6 className="p-1 m-1 font-sans font-medium text-lg antialiased bg-orange-200 rounded-md">
-              {year}
-            </h6>
-          </div>
-          <div className="container text-center">
-            <input
-              type="range"
-              min={15}
-              max={50}
-              step={1}
-              value={year}
-              style={{ width: 700 }}
-              onChange={(e) => setYear(e.target.value)}
-            />
+        <Slider
+          Label={`Number of ${toggle ? "Months" : "Year"}`}
+          Value={year}
+          SliderColor="bg-red-300"
+          Min={15}
+          Max={50}
+          OnChange={(e) => setYear(e.target.value)}
+        />
+        <button className="text-orange-600" onClick={handleToggle}>
+          {toggle ? "Months" : "Year"}
+        </button>
+
+        <div className="mt-6">
+          <div className="flex justify-between text-lg font-semibold mt-2">
+            <span>Maturity Amount:</span>
+            <span>₹ {ReturnAmt}</span>
           </div>
         </div>
-
-        <div className="m-2 p-2">
-          <h3 className="container block text-center font-sans font-medium text-lg bg-orange-200">
-            Maturity Amount: ₹{ReturnAmt}
-          </h3>
-        </div>
-
       </div>
     </div>
   );
