@@ -1,15 +1,24 @@
-import React from 'react';
-import Header from '../Component/Header';
+import React from "react";
 
-function Home() {
+const Home = () => {
   return (
-    <div>
-      <div className='container'>
-        <h1 className='container text-xl font-sans'>Welcome to finance Corporation</h1>
-        <h3 className='container text-xl font-serif'>We help you to provide all the financial calculation to you</h3>
+    <div className="min-h-screen bg-gray-100 flex items-center justify-center">
+      <div className="bg-white shadow-lg rounded-lg p-10">
+        <h1 className="text-4xl font-bold mb-4 text-center text-gray-800">
+          Welcome to the Finance Corporation
+        </h1>
+        <p className="text-gray-600 text-lg text-center">
+          This is a simple home page built with React and Tailwind CSS.
+        </p>
+        <div className="flex justify-center mt-6">
+          <p className="text-gray-600 text-lg text-center">
+            {" "}
+            Explore the application
+          </p>
+        </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
 export default Home;

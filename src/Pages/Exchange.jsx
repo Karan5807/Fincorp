@@ -121,6 +121,8 @@ function Exchange() {
 
         </div>
 
+        <h2 className="text-lg font-sans font-semibold">Due to api limit it's Not working</h2>
+
       </div>
     </div>
   );
